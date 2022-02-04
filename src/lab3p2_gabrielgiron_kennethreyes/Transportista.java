@@ -1,44 +1,48 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3p2_gabrielgiron_kennethreyes;
-
-import java.util.Date;
+package com.mycompany.lab3p2_kennethreyes;
 
 /**
  *
- * @author Galex
+ * @author Daniel
  */
-public class Transportista extends Personas{
-    private int AñosEXP;
-    private String Apodo;
+import java.util.Date;
 
-    public Transportista(int AñosEXP, String Apodo, String Nombre, long ID, Date FechaNacimiento) {
-        super(Nombre, ID, FechaNacimiento);
-        this.AñosEXP = AñosEXP;
-        this.Apodo = Apodo;
+public class Transportista extends Persona {
+
+    int timeexp;
+    String apodo;
+
+    public Transportista(int timeexp, String apodo, String nombre, int id, Date fecha) {
+        super(nombre, id, fecha);
+        this.timeexp = timeexp;
+        this.apodo = apodo;
     }
 
-    public int getAñosEXP() {
-        return AñosEXP;
+    public Transportista() {
     }
 
-    public void setAñosEXP(int AñosEXP) {
-        this.AñosEXP = AñosEXP;
+    public int getTimeexp() {
+        return timeexp;
+    }
+
+    public void setTimeexp(int timeexp) {
+        this.timeexp = timeexp;
     }
 
     public String getApodo() {
-        return Apodo;
+        return apodo;
     }
 
-    public void setApodo(String Apodo) {
-        this.Apodo = Apodo;
+    public void setApodo(String apodo) {
+        this.apodo = apodo;
     }
 
     @Override
     public String toString() {
-        return "Transportista{" + "AñosEXP=" + AñosEXP + ", Apodo=" + Apodo + '}';
+        return "Transportista" + "time de experiencia = " + timeexp + ", apodo = " + apodo;
     }
+    
 }

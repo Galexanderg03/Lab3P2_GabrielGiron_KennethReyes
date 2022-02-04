@@ -1,41 +1,41 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3p2_gabrielgiron_kennethreyes;
+package com.mycompany.lab3p2_kennethreyes;
 
 /**
  *
- * @author Galex
+ * @author Daniel
  */
 public class Clase {
-    private int Codigo;
-    private String Nombre;
+int codigo;
+String Name;
 
-    public Clase(int Codigo, String Nombre) {
-        this.Codigo = Codigo;
-        this.Nombre = Nombre;
+    public Clase(int codigo, String Name) {
+        this.codigo = codigo;
+        this.Name = Name;
     }
 
     public int getCodigo() {
-        return Codigo;
+        return codigo;
     }
 
-    public void setCodigo(int Codigo) {
-        this.Codigo = Codigo;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getName() {
+        return Name;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     @Override
     public String toString() {
-        return "Clase{" + "Codigo=" + Codigo + ", Nombre=" + Nombre + '}';
+        return "Clase " + "codigo = " + codigo + ", Nombre= " + Name ;
     }
+
 }

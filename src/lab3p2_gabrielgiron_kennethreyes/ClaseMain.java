@@ -1,27 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3p2_gabrielgiron_kennethreyes;
+package com.mycompany.lab3p2_kennethreyes;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  *
- * @author Galex
+ * @author Daniel
  */
-public class Lab3P2_GabrielGiron_KennethReyes {
-static Scanner read = new Scanner(System.in);
-    /**
-     * @param args the command line arguments
-     */
+public class ClaseMain {
+    static Scanner read = new Scanner(System.in);
     public static void main(String[] args) {
-        ArrayList<Personas> Personas = new ArrayList();
-        ArrayList<Transportes> Transportes = new ArrayList();
-        ArrayList<Estacion> Rutas = new ArrayList();
-        int opcion = -1;
+        int opcion = 0;
         do {
             System.out.println("0. Salir\n1. Crear Clase\n2. Crear Ruta\n3. Crear Alumno\n4. Agregar Clase a Alumno\n"
                     + "5. Crear Transportista\n6. Crear Transporte\n7. Simulación\n8. Listar Clases\n9. Listar Rutas\n"
@@ -114,5 +106,3 @@ static Scanner read = new Scanner(System.in);
         }while(opcion!=0);
     }
 }
-    
-

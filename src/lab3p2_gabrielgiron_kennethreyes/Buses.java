@@ -1,30 +1,56 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3p2_gabrielgiron_kennethreyes;
-
-import java.util.ArrayList;
+package com.mycompany.lab3p2_kennethreyes;
 
 /**
  *
- * @author Galex
+ * @author Daniel
  */
-public class Buses extends Transportes {
-    
-    private ArrayList<Alumno> Alumnos = new ArrayList();
+import java.util.ArrayList;
 
-    public Buses(String Placa, String Color, String Transportista) {
-        super(Placa, Color, Transportista);
+public class Buses {
+ArrayList<Alumno> alumnos;
+int sillas;
+int pie;
+
+    public Buses(ArrayList<Alumno> alumnos, int sillas, int pie) {
+        this.alumnos = alumnos;
+        this.sillas = sillas;
+        this.pie = pie;
+    }
+
+    public Buses() {
     }
 
     public ArrayList<Alumno> getAlumnos() {
-        return Alumnos;
+        return alumnos;
     }
 
-    public void setAlumnos(ArrayList<Alumno> Alumnos) {
-        this.Alumnos = Alumnos;
+    public void setAlumnos(ArrayList<Alumno> alumnos) {
+        this.alumnos = alumnos;
     }
-    
+
+    public int getSillas() {
+        return sillas;
+    }
+
+    public void setSillas(int sillas) {
+        this.sillas = sillas;
+    }
+
+    public int getPie() {
+        return pie;
+    }
+
+    public void setPie(int pie) {
+        this.pie = pie;
+    }
+
+    @Override
+    public String toString() {
+        return "Buses " + "alumnos= " + alumnos + ", sillas= " + sillas + ", pie= " + pie ;
+    }
+
 }

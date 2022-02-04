@@ -1,44 +1,49 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3p2_gabrielgiron_kennethreyes;
-
-import java.util.ArrayList;
-import java.util.Date;
+package com.mycompany.lab3p2_kennethreyes;
 
 /**
  *
- * @author Galex
+ * @author Daniel
  */
-public class Alumno extends Personas{
-    private long IDEstudiante;
-    private ArrayList<Clase> Clases = new ArrayList();
-    
-    public Alumno(long IDEstudiante, String Nombre, long ID, Date FechaNacimiento) {
-        super(Nombre, ID, FechaNacimiento);
-        this.IDEstudiante = IDEstudiante;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Alumno extends Persona{
+    int estudentid;
+    ArrayList <Clase> clases;
+
+    public Alumno(int estudentid, ArrayList<Clase> clases, String nombre, int id, Date fecha) {
+        super(nombre, id, fecha);
+        this.estudentid = estudentid;
+        this.clases = clases;
     }
 
-    public long getIDEstudiante() {
-        return IDEstudiante;
+    public Alumno() {
     }
 
-    public void setIDEstudiante(long IDEstudiante) {
-        this.IDEstudiante = IDEstudiante;
+    public int getEstudentid() {
+        return estudentid;
+    }
+
+    public void setEstudentid(int estudentid) {
+        this.estudentid = estudentid;
     }
 
     public ArrayList<Clase> getClases() {
-        return Clases;
+        return clases;
     }
 
-    public void setClases(ArrayList<Clase> Clases) {
-        this.Clases = Clases;
+    public void setClases(ArrayList<Clase> clases) {
+        this.clases = clases;
     }
 
     @Override
     public String toString() {
-        return "Alumno{" + "IDEstudiante=" + IDEstudiante + ", Clases=" + Clases + '}';
+        return "Alumno " + "estudiante identidad= " + estudentid + ", clases= " + clases ;
     }
+    
+    
 }
