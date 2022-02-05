@@ -25,13 +25,16 @@ public class ClaseMain {
     static ArrayList<Rutas> rutas = new ArrayList();
 
     public static void main(String[] args) {
-        int opcion = 0;
+        int opcion;
         do {
             System.out.println("0. Salir\n1. Crear Clase\n2. Crear Ruta\n3. Crear Alumno\n4. Agregar Clase a Alumno\n"
                     + "5. Crear Transportista\n6. Crear Transporte\n7. Simulación\n8. Listar Clases\n9. Listar Rutas\n"
                     + "10. Listar Alumnos\n11. Listar Transportistas\n12. Listar Transportes");
             opcion = read.nextInt();
             switch (opcion) {
+                case 0:
+                    break;
+                    
                 case 1:
                     crearClass();
                     break;
@@ -101,38 +104,84 @@ public class ClaseMain {
                     + "6. Añadir ruta\n7. Quitar ruta\n8. Imprimir transporte\n9. Comenzar");
             opcion = read.nextInt();
             switch (opcion) {
-                case 1:{
-                    
+                case 0:
                     break;
-                }
                 
-                case 2:{
-                    
+                case 1: {
+                    System.out.println("Ingrese la posicion del alumno en la lista");
+                    int pos = read.nextInt();
+                    if (pos < pers.size()) {
+                        if (pers.get(pos) instanceof Alumno) {
+                            tran.getAlumn().add(((Alumno) pers.get(pos)));
+                        } else {
+                            System.out.println("Posicion no Valida");
+                        }
+                    } else {
+                        System.out.println("Posicion no Valida");
+                    }
                     break;
                 }
-                    
-                case 3:{
+
+                case 2: {
+                    System.out.println("Ingrese la posicion del alumno en la lista");
+                    int pos = read.nextInt();
+                    if (pos < pers.size()) {
+                        if (pers.get(pos) instanceof Alumno) {
+                            tran.getAlumn().remove(pos);
+                        } else {
+                            System.out.println("Posicion no Valida");
+                        }
+                    } else {
+                        System.out.println("Posicion no Valida");
+                    }
+                    break;
+                }
+
+                case 3: {
                     String salida = "";
                     for (int i = 0; i < tran.getAlumn().size(); i++) {
-                        salida = salida+tran.getAlumn().get(i)+"\n";
+                        salida = salida + tran.getAlumn().get(i) + "\n";
                     }
                     System.out.println(salida);
                     break;
                 }
 
-                case 4:{
-                    
+                case 4: {
+                    System.out.println("Ingrese la posicion del transportista en la lista: ");
+                    int pos = read.nextInt();
+                    if(pos<pers.size()){
+                        if(pers.get(pos) instanceof Transportista){
+                            String transports = pers.get(pos).getNombre();
+                            tran.setTransportista(transports);
+                        }
+                    }
+                    break;
+                }
+
+                case 5: {
+                    tran.setTransportista("");
+                    break;
+                }
+
+                case 6:{
+                    System.out.println("Ingrese la posicion de la ruta en la lista");
+                    int pos = read.nextInt();
+                    if (pos < rutas.size()) {
+                        tran.getRutas().add(rutas.get(pos));
+                    } else {
+                        System.out.println("Posicion no Valida");
+                    }
                     break;
                 }
                 
-                case 5:{
-                    break;
-                }
-
-                case 6:
-                    break;
-
                 case 7:
+                    System.out.println("Ingrese la posicion de la ruta en la lista a eliminar");
+                    int pos = read.nextInt();
+                    if (pos < rutas.size()) {
+                        tran.getRutas().remove(pos);
+                    } else {
+                        System.out.println("Posicion no Valida");
+                    }
                     break;
 
                 case 8:
@@ -141,6 +190,7 @@ public class ClaseMain {
                     break;
 
                 case 9:
+                    Simulacion(tran);
                     break;
 
                 default:
@@ -175,7 +225,7 @@ public class ClaseMain {
         }
 
     }
-    
+
     public static void crearRuta() {
         System.out.println("Ingrese el nombre de la ruta: ");
         String name = read.next();
@@ -185,27 +235,54 @@ public class ClaseMain {
         int y = read.nextInt();
         rutas.add(new Rutas(name, x, y));
     }
-    
-    public static void crearTransporte(){
-        System.out.println("1. Bus\n2. Taxi\n3. Mototaxi\n4.Rapidito"); int opcion = read.nextInt();
-        switch(opcion){
-            case 1:{
-                System.out.println("Ingrese la placa: "); int placa = read.nextInt();
-                System.out.println("Ingrese el color del bus: "); String color = read.next();
-                
+
+    public static void crearTransporte() {
+        System.out.println("1. Bus\n2. Rapidito\n3. Mototaxi\n4. Taxi");
+        int opcion = read.nextInt();
+        switch (opcion) {
+            case 1: {
+                System.out.println("Cuantas sillas tiene el bus: ");
+                int sillas = read.nextInt();
+                System.out.println("Cuantas personas pueden estar de pie: ");
+                int pie = read.nextInt();
+                System.out.println("Ingrese la placa: ");
+                String placa = read.next();
+                System.out.println("Ingrese el color del bus: ");
+                String color = read.next();
+                Buses u = new Buses(sillas, pie, placa, color);
+                trans.add(u);
                 break;
             }
-            case 2:{
-                
+            case 2: {
+                System.out.println("Cuantas sillas tiene el rapidito: ");
+                int sillas = read.nextInt();
+                System.out.println("Ingrese la placa: ");
+                String placa = read.next();
+                System.out.println("Ingrese el color del Rapidito: ");
+                String color = read.next();
+                Rapidito u = new Rapidito(sillas, placa, color);
+                trans.add(u);
                 break;
             }
-            case 3:{
-                
+            case 3: {
+                System.out.println("Ingrese la placa: ");
+                String placa = read.next();
+                System.out.println("Ingrese el color del MotoTaxi: ");
+                String color = read.next();
+                MotoTaxi u = new MotoTaxi(placa, color);
+                trans.add(u);
                 break;
             }
-            
-            case 4:{
-                
+
+            case 4: {
+                System.out.println("Ingrese el numero de Taxi : ");
+                String idTaxi = read.next();
+                System.out.println("Ingrese la placa: ");
+                String placa = read.next();
+                System.out.println("Ingrese el color del Taxi: ");
+                String color = read.next();
+                Taxi u = new Taxi(idTaxi, placa, color);
+                trans.add(u);
                 break;
             }
             default:
@@ -247,46 +324,42 @@ public class ClaseMain {
             System.out.println("Posicion Invalida");
         }
     }
-    
-    public static void listarClases(){
-        for(Clase clas: clases){
+
+    public static void listarClases() {
+        for (Clase clas : clases) {
             System.out.println(clases.indexOf(clas));
         }
     }
-    
-    public static void listarRutas(){
-        for(Rutas rut: rutas){
+
+    public static void listarRutas() {
+        for (Rutas rut : rutas) {
             System.out.println(rutas.indexOf(rut));
         }
     }
-    
-    public static void listarAlum(){
+
+    public static void listarAlum() {
         String salida = "";
         for (int i = 0; i < pers.size(); i++) {
-            if(pers.get(i) instanceof Alumno){
-                salida=salida+pers.get(i)+"\n";
+            if (pers.get(i) instanceof Alumno) {
+                salida = salida + pers.get(i) + "\n";
             }
         }
         System.out.println(salida);
     }
-    
-    public static void listarTransportistas(){
+
+    public static void listarTransportistas() {
         String salida = "";
         for (int i = 0; i < pers.size(); i++) {
-            if(pers.get(i) instanceof Transportista){
-                salida=salida+pers.get(i)+"\n";
+            if (pers.get(i) instanceof Transportista) {
+                salida = salida + pers.get(i) + "\n";
             }
         }
         System.out.println(salida);
     }
-    
-    public static void listarTransportes(){
-        for(Transporte transp: trans){
+
+    public static void listarTransportes() {
+        for (Transporte transp : trans) {
             System.out.println(trans.indexOf(transp));
         }
-    }
-    
-    public static void listarATrans(){
-        
     }
 }
