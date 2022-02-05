@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +17,6 @@ import java.util.logging.Logger;
  * @author Daniel
  */
 public class ClaseMain {
-
     static Scanner read = new Scanner(System.in).useDelimiter("\n");
     static ArrayList<Clase> clases = new ArrayList();
     static ArrayList<Persona> pers = new ArrayList();
@@ -102,7 +100,7 @@ public class ClaseMain {
         do {
             System.out.println("0. Salir\n1. Subir alumno al transporte\n2. Bajar alumno del transporte\n"
                     + "3. Listar alumnos del transporte\n4. Escoger transportista\n5. Quitar transportista\n"
-                    + "6. Añadir ruta\n7. Quitar ruta\n8. Imprimir transporte\n9. Comenzar");
+                    + "6. Añadir ruta\n7. Quitar ruta\n8. Imprimir transporte\n9. Eliminar transporte");
             opcion = read.nextInt();
             switch (opcion) {
                 case 0:
@@ -235,7 +233,15 @@ public class ClaseMain {
                     break;
 
                 case 9:
-                    
+                    trans.remove(tran);
+                    String muertos="";
+                    for (int i = 0; i < tran.getAlumn().size(); i++) {
+                        muertos = muertos + tran.getAlumn().get(i) + "\n";
+                        pers.remove(i);
+                        tran.getAlumn().remove(i);
+                        tran.setTransportista("");
+                    }
+                    System.out.println("***Los muertos son***\n"+tran.getTransportista()+"\n"+muertos);
                     break;
 
                 default:
@@ -247,10 +253,10 @@ public class ClaseMain {
 
     public static void crearClass() {
         int codigo;
-        do {
-            System.out.println("Ingrese el codigo de la clase");
-            codigo = read.nextInt();
-        } while (buscarClass(codigo));
+        do{
+        System.out.println("Ingrese el codigo de la clase");
+        codigo = read.nextInt();
+        }while(buscarClass(codigo));
         System.out.println("Ingrese el nombre de la clase");
         String clase = read.next();
         Clase u = new Clase(codigo, clase);
@@ -259,10 +265,10 @@ public class ClaseMain {
 
     public static void crearAlum() {
         int idEstudiante;
-        do {
-            System.out.println("Ingrese id de estudiante: ");
-            idEstudiante = read.nextInt();
-        } while (buscarId(idEstudiante));
+        do{
+        System.out.println("Ingrese id de estudiante: ");
+        idEstudiante = read.nextInt();
+        }while(buscarId(idEstudiante));
         System.out.println("Nombre del estudiante: ");
         String name = read.next();
         System.out.println("Ingrese fecha de nacimiento: ");
@@ -276,47 +282,43 @@ public class ClaseMain {
         }
 
     }
-
-    public static boolean buscarPlaca(String placa) {
-        for (Transporte trps : trans) {
-            if (trps.getPlaca().equals(placa)) {
+    
+    public static boolean buscarPlaca(String placa){
+        for(Transporte trps: trans){
+            if(trps.getPlaca().equals(placa)){
                 System.out.println("El numero de placa debe ser unico");
                 return true;
             }
         }
         return false;
     }
-
+    
     public static boolean buscarId(int codigo) {
         for (Persona perso : pers) {
-            if (perso.getId() == codigo) {
+            if (perso.getId() == codigo){
                 System.out.println("El id debe ser unico");
                 return true;
             }
         }
         return false;
     }
-
-    public static boolean buscarClass(int codigo) {
-        for (Clase cla : clases) {
-            if (cla.getCodigo() == codigo) {
+    
+    public static boolean buscarClass(int codigo){
+        for(Clase cla: clases){
+            if(cla.getCodigo() == codigo){
                 System.out.println("El id debe ser unico");
                 return true;
             }
         }
         return false;
     }
-
+    
     public static void crearRuta() {
         System.out.println("Ingrese la posicion X: ");
         int x = read.nextInt();
         System.out.println("Ingrese la posicion Y: ");
         int y = read.nextInt();
-        rutas.add(new Rutas(x, y));
-    }
-
-    public static void comenzarSimu() {
-        
+        rutas.add(new Rutas( x, y));
     }
 
     public static void crearTransporte() {
@@ -329,10 +331,10 @@ public class ClaseMain {
                 int sillas = read.nextInt();
                 System.out.println("Cuantas personas pueden estar de pie: ");
                 int pie = read.nextInt();
-                do {
-                    System.out.println("Ingrese la placa: ");
-                    placa = read.next();
-                } while (buscarPlaca(placa));
+                do{
+                System.out.println("Ingrese la placa: ");
+                placa = read.next();
+                }while(buscarPlaca(placa));
                 System.out.println("Ingrese el color del bus: ");
                 String color = read.next();
                 Buses u = new Buses("Bus", sillas, pie, placa, color);
@@ -343,10 +345,10 @@ public class ClaseMain {
                 String placa;
                 System.out.println("Cuantas sillas tiene el rapidito: ");
                 int sillas = read.nextInt();
-                do {
-                    System.out.println("Ingrese la placa: ");
-                    placa = read.next();
-                } while (buscarPlaca(placa));
+                do{
+                System.out.println("Ingrese la placa: ");
+                placa = read.next();
+                }while(buscarPlaca(placa));
                 System.out.println("Ingrese el color del Rapidito: ");
                 String color = read.next();
                 Rapidito u = new Rapidito("Rapidito", sillas, placa, color);
@@ -355,10 +357,10 @@ public class ClaseMain {
             }
             case 3: {
                 String placa;
-                do {
-                    System.out.println("Ingrese la placa: ");
-                    placa = read.next();
-                } while (buscarPlaca(placa));
+                do{
+                System.out.println("Ingrese la placa: ");
+                placa = read.next();
+                }while(buscarPlaca(placa));
                 System.out.println("Ingrese el color del MotoTaxi: ");
                 String color = read.next();
                 MotoTaxi u = new MotoTaxi("MotoTaxi", placa, color);
@@ -370,10 +372,10 @@ public class ClaseMain {
                 String placa;
                 System.out.println("Ingrese el numero de Taxi : ");
                 String idTaxi = read.next();
-                do {
-                    System.out.println("Ingrese la placa: ");
-                    placa = read.next();
-                } while (buscarPlaca(placa));
+                do{
+                System.out.println("Ingrese la placa: ");
+                placa = read.next();
+                }while(buscarPlaca(placa));
                 System.out.println("Ingrese el color del Taxi: ");
                 String color = read.next();
                 Taxi u = new Taxi("Taxi", idTaxi, placa, color);
@@ -394,10 +396,10 @@ public class ClaseMain {
         String apodo = read.next();
         System.out.println("Ingrese el nombre: ");
         String nombre = read.next();
-        do {
-            System.out.println("Ingrese el id: ");
-            id = read.nextInt();
-        } while (buscarId(id));
+        do{
+        System.out.println("Ingrese el id: ");
+        id = read.nextInt();
+        }while(buscarId(id));
         System.out.println("Ingrese la fecha de nacimiento: ");
         String fecha = read.next();
         try {
@@ -424,8 +426,8 @@ public class ClaseMain {
     }
 
     public static void listarClases() {
-        for (Clase clas : clases) {
-            System.out.println(clas.getName());
+        for (int i = 0;i<clases.size();i++) {
+            System.out.println(clases.get(i));
         }
     }
 
@@ -456,8 +458,8 @@ public class ClaseMain {
     }
 
     public static void listarTransportes() {
-        for (Transporte transp : trans) {
-            System.out.println(transp.getNombre());
+        for (int i = 0;i<trans.size();i++) {
+            System.out.println(trans.get(i));
         }
     }
 }
