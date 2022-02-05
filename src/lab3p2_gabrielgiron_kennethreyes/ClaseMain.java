@@ -8,8 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,13 +19,11 @@ import java.util.logging.Logger;
  */
 public class ClaseMain {
 
-    static Random rnd = new Random();
     static Scanner read = new Scanner(System.in).useDelimiter("\n");
     static ArrayList<Clase> clases = new ArrayList();
     static ArrayList<Persona> pers = new ArrayList();
     static ArrayList<Transporte> trans = new ArrayList();
     static ArrayList<Rutas> rutas = new ArrayList();
-    static Persona perso = new Persona();
 
     public static void main(String[] args) {
         int opcion;
@@ -237,51 +235,7 @@ public class ClaseMain {
                     break;
 
                 case 9:
-                    do {
-                        int x1 = 0;
-                        int y1 = 0;
-                        do {
-                            Rutas SiguienteRuta;
-                            int Pos = 0;
-                            int D = 0;
-                            for (int i = 0; i < tran.getRutas().size(); i++) {
-                                int x2 = tran.getRutas().get(i).getX();
-                                int y2 = tran.getRutas().get(i).getY();
-                                int Xr = x2 - x1;
-                                int Yr = y2 - y1;
-                                double Xc = Math.pow(Xr, 2);
-                                double Yc = Math.pow(Yr, 2);
-                                int suma = (int) Xc + (int) Yc;
-                                double SQRT = Math.sqrt(suma);
-                                int total = (int) SQRT;
-                                if (D == 0) {
-                                    D = total;
-                                    SiguienteRuta = tran.getRutas().get(i);
-                                    Pos = i;
-                                } else if (total < D) {
-                                    D = total;
-                                    SiguienteRuta = tran.getRutas().get(i);
-                                    Pos = i;
-                                }
-                            }
-                            if (tran.getAlumn().size() > tran.getRutas().size()) {
-                                int bajar = tran.getAlumn().size() / tran.getRutas().size();
-                                while (bajar > 0) {
-                                    int B = rnd.nextInt(tran.getAlumn().size() - 1);
-                                    tran.getAlumn().remove(B);
-                                }
-                            } else if (tran.getAlumn().size() == tran.getRutas().size()) {
-                                int bajar = 1;
-                                while (bajar > 0) {
-                                    int B = rnd.nextInt(tran.getAlumn().size() - 1);
-                                    tran.getAlumn().remove(B);
-                                }
-                            } else if (tran.getAlumn().size() < tran.getRutas().size()) {
-                                System.out.println("Hay mas rutas que alumnos\n no se bajara nadie");
-                            }
-                            tran.getRutas().remove(Pos);
-                        } while (tran.getRutas().size() != 0);
-                    } while (tran.getRutas().size() != 0);
+                    
                     break;
 
                 default:
@@ -292,8 +246,11 @@ public class ClaseMain {
     }
 
     public static void crearClass() {
-        System.out.println("Ingrese el codigo de la clase");
-        int codigo = read.nextInt();
+        int codigo;
+        do {
+            System.out.println("Ingrese el codigo de la clase");
+            codigo = read.nextInt();
+        } while (buscarClass(codigo));
         System.out.println("Ingrese el nombre de la clase");
         String clase = read.next();
         Clase u = new Clase(codigo, clase);
@@ -320,24 +277,46 @@ public class ClaseMain {
 
     }
 
-    public static boolean buscarId(int codigo) {
-        for (Persona eph : pers) {
-            if (eph.getId() == codigo) {
+    public static boolean buscarPlaca(String placa) {
+        for (Transporte trps : trans) {
+            if (trps.getPlaca().equals(placa)) {
+                System.out.println("El numero de placa debe ser unico");
                 return true;
             }
         }
-        System.out.println("El id debe ser unico");
+        return false;
+    }
+
+    public static boolean buscarId(int codigo) {
+        for (Persona perso : pers) {
+            if (perso.getId() == codigo) {
+                System.out.println("El id debe ser unico");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean buscarClass(int codigo) {
+        for (Clase cla : clases) {
+            if (cla.getCodigo() == codigo) {
+                System.out.println("El id debe ser unico");
+                return true;
+            }
+        }
         return false;
     }
 
     public static void crearRuta() {
-        System.out.println("Ingrese el nombre de la ruta: ");
-        String name = read.next();
         System.out.println("Ingrese la posicion X: ");
         int x = read.nextInt();
         System.out.println("Ingrese la posicion Y: ");
         int y = read.nextInt();
-        rutas.add(new Rutas(name, x, y));
+        rutas.add(new Rutas(x, y));
+    }
+
+    public static void comenzarSimu() {
+        
     }
 
     public static void crearTransporte() {
@@ -345,47 +324,59 @@ public class ClaseMain {
         int opcion = read.nextInt();
         switch (opcion) {
             case 1: {
+                String placa;
                 System.out.println("Cuantas sillas tiene el bus: ");
                 int sillas = read.nextInt();
                 System.out.println("Cuantas personas pueden estar de pie: ");
                 int pie = read.nextInt();
-                System.out.println("Ingrese la placa: ");
-                String placa = read.next();
+                do {
+                    System.out.println("Ingrese la placa: ");
+                    placa = read.next();
+                } while (buscarPlaca(placa));
                 System.out.println("Ingrese el color del bus: ");
                 String color = read.next();
-                Buses u = new Buses(sillas, pie, placa, color);
+                Buses u = new Buses("Bus", sillas, pie, placa, color);
                 trans.add(u);
                 break;
             }
             case 2: {
+                String placa;
                 System.out.println("Cuantas sillas tiene el rapidito: ");
                 int sillas = read.nextInt();
-                System.out.println("Ingrese la placa: ");
-                String placa = read.next();
+                do {
+                    System.out.println("Ingrese la placa: ");
+                    placa = read.next();
+                } while (buscarPlaca(placa));
                 System.out.println("Ingrese el color del Rapidito: ");
                 String color = read.next();
-                Rapidito u = new Rapidito(sillas, placa, color);
+                Rapidito u = new Rapidito("Rapidito", sillas, placa, color);
                 trans.add(u);
                 break;
             }
             case 3: {
-                System.out.println("Ingrese la placa: ");
-                String placa = read.next();
+                String placa;
+                do {
+                    System.out.println("Ingrese la placa: ");
+                    placa = read.next();
+                } while (buscarPlaca(placa));
                 System.out.println("Ingrese el color del MotoTaxi: ");
                 String color = read.next();
-                MotoTaxi u = new MotoTaxi(placa, color);
+                MotoTaxi u = new MotoTaxi("MotoTaxi", placa, color);
                 trans.add(u);
                 break;
             }
 
             case 4: {
+                String placa;
                 System.out.println("Ingrese el numero de Taxi : ");
                 String idTaxi = read.next();
-                System.out.println("Ingrese la placa: ");
-                String placa = read.next();
+                do {
+                    System.out.println("Ingrese la placa: ");
+                    placa = read.next();
+                } while (buscarPlaca(placa));
                 System.out.println("Ingrese el color del Taxi: ");
                 String color = read.next();
-                Taxi u = new Taxi(idTaxi, placa, color);
+                Taxi u = new Taxi("Taxi", idTaxi, placa, color);
                 trans.add(u);
                 break;
             }
@@ -396,14 +387,17 @@ public class ClaseMain {
     }
 
     public static void crearTransportista() {
+        int id;
         System.out.println("Ingrese el tiempo de experiencia: ");
         int timeexp = read.nextInt();
         System.out.println("Ingrese el apodo: ");
         String apodo = read.next();
         System.out.println("Ingrese el nombre: ");
         String nombre = read.next();
-        System.out.println("Ingrese el id: ");
-        int id = read.nextInt();
+        do {
+            System.out.println("Ingrese el id: ");
+            id = read.nextInt();
+        } while (buscarId(id));
         System.out.println("Ingrese la fecha de nacimiento: ");
         String fecha = read.next();
         try {
@@ -431,7 +425,7 @@ public class ClaseMain {
 
     public static void listarClases() {
         for (Clase clas : clases) {
-            System.out.println(clases.indexOf(clas));
+            System.out.println(clas.getName());
         }
     }
 
@@ -463,7 +457,7 @@ public class ClaseMain {
 
     public static void listarTransportes() {
         for (Transporte transp : trans) {
-            System.out.println(trans.indexOf(transp));
+            System.out.println(transp.getNombre());
         }
     }
 }

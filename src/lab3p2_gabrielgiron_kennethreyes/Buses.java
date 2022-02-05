@@ -14,8 +14,8 @@ public class Buses extends Transporte {
     private int sillas;
     private int pie;
 
-    public Buses(int sillas, int pie, String placa, String color) {
-        super(placa, color);
+    public Buses(String nombre, int sillas, int pie, String placa, String color) {
+        super(nombre, placa, color);
         this.sillas = sillas;
         this.pie = pie;
     }

@@ -10,27 +10,17 @@ package lab3p2_gabrielgiron_kennethreyes;
  */
 public class Rutas {
 
-    private String nombre;
     private int x;
     private int y;
 
-    public Rutas(String nombre, int x, int y) {
-        this.nombre = nombre;
+    public Rutas( int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     public Rutas() {
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
+    
     public int getX() {
         return x;
     }

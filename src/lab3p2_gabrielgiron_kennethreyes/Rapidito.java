@@ -9,8 +9,8 @@ public class Rapidito extends Transporte{
 
     private int sillas;
 
-    public Rapidito(int sillas, String placa, String color) {
-        super(placa, color);
+    public Rapidito(String nombre, int sillas, String placa, String color) {
+        super(nombre, placa, color);
         this.sillas = sillas;
     }
     

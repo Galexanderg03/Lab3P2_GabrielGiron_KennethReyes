@@ -12,8 +12,8 @@ public class MotoTaxi extends Transporte{
 
     final int capacidad = 2;
 
-    public MotoTaxi(String placa, String color) {
-        super(placa, color);
+    public MotoTaxi(String nombre, String placa, String color) {
+        super(nombre, placa, color);
     }
     
     public int getCapacidad() {

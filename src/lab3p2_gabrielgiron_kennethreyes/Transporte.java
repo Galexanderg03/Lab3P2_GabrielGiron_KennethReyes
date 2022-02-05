@@ -14,15 +14,25 @@ public class Transporte {
 
     private String placa;
     private String color;
+    private String nombre;
     private String transportista;
     private ArrayList<Rutas> rutas = new ArrayList();
     private ArrayList<Alumno> alumn = new ArrayList();
 
-    public Transporte(String placa, String color) {
+    public Transporte(String nombre, String placa, String color) {
+        this.nombre = nombre;
         this.placa = placa;
         this.color = color;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public ArrayList<Alumno> getAlumn() {
         return alumn;
     }

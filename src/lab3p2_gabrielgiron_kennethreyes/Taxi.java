@@ -13,8 +13,8 @@ public class Taxi extends Transporte{
     final int capacidad = 4;
     private String idTaxi;
 
-    public Taxi(String id, String placa, String color) {
-        super(placa, color);
+    public Taxi(String nombre, String id, String placa, String color) {
+        super(nombre, placa, color);
         this.idTaxi = id;
     }
     
