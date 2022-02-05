@@ -15,13 +15,20 @@ public class Transporte {
     private String placa;
     private String color;
     private String transportista;
-    private ArrayList<Rutas> rutas;
+    private ArrayList<Rutas> rutas = new ArrayList();
+    private ArrayList<Alumno> alumn = new ArrayList();
 
-    public Transporte(String placa, String color, String transportista, ArrayList<Rutas> rutas) {
+    public Transporte(String placa, String color) {
         this.placa = placa;
         this.color = color;
-        this.transportista = transportista;
-        this.rutas = rutas;
+    }
+
+    public ArrayList<Alumno> getAlumn() {
+        return alumn;
+    }
+
+    public void setAlumn(ArrayList<Alumno> alumn) {
+        this.alumn = alumn;
     }
 
     public Transporte() {
@@ -61,7 +68,7 @@ public class Transporte {
 
     @Override
     public String toString() {
-        return "Tranporte " + "placa= " + placa + ", color= " + color + ", transportista= " + transportista + ", rutas= " + rutas;
+        return "Placa: " + placa + ", Color: " + color + ", Transportista: " + transportista + ", Rutas: " + rutas;
     }
 
 }

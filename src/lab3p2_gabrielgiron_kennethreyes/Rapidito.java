@@ -4,25 +4,16 @@
  */
 package lab3p2_gabrielgiron_kennethreyes;
 
-/**
- *
- * @author Daniel
- */
-import java.util.ArrayList;
 
-public class Rapidito {
+public class Rapidito extends Transporte{
 
     private int sillas;
-    private ArrayList<Alumno> alummnos;
 
-    public Rapidito() {
-    }
-
-    public Rapidito(int sillas, ArrayList<Alumno> alummnos) {
+    public Rapidito(int sillas, String placa, String color) {
+        super(placa, color);
         this.sillas = sillas;
-        this.alummnos = alummnos;
     }
-
+    
     public int getSillas() {
         return sillas;
     }
@@ -30,18 +21,10 @@ public class Rapidito {
     public void setSillas(int sillas) {
         this.sillas = sillas;
     }
-
-    public ArrayList<Alumno> getAlummnos() {
-        return alummnos;
-    }
-
-    public void setAlummnos(ArrayList<Alumno> alummnos) {
-        this.alummnos = alummnos;
-    }
-
+    
     @Override
     public String toString() {
-        return "Rapidito " + "sillas= " + sillas + ", alummnos= " + alummnos;
+        return "Rapidito " + "sillas= " + sillas;
     }
 
 }

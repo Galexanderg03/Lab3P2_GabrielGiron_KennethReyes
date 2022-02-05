@@ -8,28 +8,21 @@ package lab3p2_gabrielgiron_kennethreyes;
  *
  * @author Daniel
  */
-public class MotoTaxi {
+public class MotoTaxi extends Transporte{
 
-    private int capacidad;
+    final int capacidad = 2;
 
-    public MotoTaxi() {
+    public MotoTaxi(String placa, String color) {
+        super(placa, color);
     }
-
-    public MotoTaxi(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
+    
     public int getCapacidad() {
         return capacidad;
     }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
+    
     @Override
     public String toString() {
-        return "MotoTaxi" + "capacidad= " + capacidad;
+        return "Vehiculo: MotoTaxi"+super.toString();
     }
 
 }

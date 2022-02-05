@@ -8,31 +8,18 @@ package lab3p2_gabrielgiron_kennethreyes;
  *
  * @author Daniel
  */
-import java.util.ArrayList;
 
-public class Buses {
+public class Buses extends Transporte {
 
-    private ArrayList<Alumno> alumnos;
     private int sillas;
     private int pie;
 
-    public Buses(ArrayList<Alumno> alumnos, int sillas, int pie) {
-        this.alumnos = alumnos;
+    public Buses(int sillas, int pie, String placa, String color) {
+        super(placa, color);
         this.sillas = sillas;
         this.pie = pie;
     }
-
-    public Buses() {
-    }
-
-    public ArrayList<Alumno> getAlumnos() {
-        return alumnos;
-    }
-
-    public void setAlumnos(ArrayList<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }
-
+    
     public int getSillas() {
         return sillas;
     }
@@ -51,7 +38,7 @@ public class Buses {
 
     @Override
     public String toString() {
-        return "Buses " + "alumnos= " + alumnos + ", sillas= " + sillas + ", pie= " + pie;
+        return "Vehiculo: Bus: "+super.toString();
     }
 
 }

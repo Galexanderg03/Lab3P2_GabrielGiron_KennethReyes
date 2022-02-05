@@ -42,7 +42,7 @@ public class Alumno extends Persona {
 
     @Override
     public String toString() {
-        return "Alumno " + "estudiante identidad= " + estudentid + ", clases= " + clases;
+        return super.toString()+"Id estudiante: "+estudentid;
     }
 
 }

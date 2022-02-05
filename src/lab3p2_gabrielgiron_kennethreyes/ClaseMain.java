@@ -18,12 +18,11 @@ import java.util.logging.Logger;
  */
 public class ClaseMain {
 
-    static Scanner read = new Scanner(System.in);
+    static Scanner read = new Scanner(System.in).useDelimiter("\n");
     static ArrayList<Clase> clases = new ArrayList();
     static ArrayList<Persona> pers = new ArrayList();
     static ArrayList<Transporte> trans = new ArrayList();
     static ArrayList<Rutas> rutas = new ArrayList();
-    static ArrayList<Alumno> alums = new ArrayList();
 
     public static void main(String[] args) {
         int opcion = 0;
@@ -54,6 +53,7 @@ public class ClaseMain {
                     break;
 
                 case 6:
+                    crearTransporte();
                     break;
 
                 case 7:
@@ -67,18 +67,23 @@ public class ClaseMain {
                     break;
 
                 case 8:
+                    listarClases();
                     break;
 
                 case 9:
+                    listarRutas();
                     break;
 
                 case 10:
+                    listarAlum();
                     break;
 
                 case 11:
+                    listarTransportistas();
                     break;
 
                 case 12:
+                    listarTransportes();
                     break;
 
                 default:
@@ -89,27 +94,40 @@ public class ClaseMain {
     }
 
     public static void Simulacion(Transporte tran) {
-        int opcion = 0;
+        int opcion;
         do {
             System.out.println("0. Salir\n1. Subir alumno al transporte\n2. Bajar alumno del transporte\n"
                     + "3. Listar alumnos del transporte\n4. Escoger transportista\n5. Quitar transportista\n"
                     + "6. Añadir ruta\n7. Quitar ruta\n8. Imprimir transporte\n9. Comenzar");
             opcion = read.nextInt();
             switch (opcion) {
-                case 1:
+                case 1:{
+                    
                     break;
+                }
+                
+                case 2:{
+                    
+                    break;
+                }
+                    
+                case 3:{
+                    String salida = "";
+                    for (int i = 0; i < tran.getAlumn().size(); i++) {
+                        salida = salida+tran.getAlumn().get(i)+"\n";
+                    }
+                    System.out.println(salida);
+                    break;
+                }
 
-                case 2:
+                case 4:{
+                    
                     break;
-
-                case 3:
+                }
+                
+                case 5:{
                     break;
-
-                case 4:
-                    break;
-
-                case 5:
-                    break;
+                }
 
                 case 6:
                     break;
@@ -167,6 +185,34 @@ public class ClaseMain {
         int y = read.nextInt();
         rutas.add(new Rutas(name, x, y));
     }
+    
+    public static void crearTransporte(){
+        System.out.println("1. Bus\n2. Taxi\n3. Mototaxi\n4.Rapidito"); int opcion = read.nextInt();
+        switch(opcion){
+            case 1:{
+                System.out.println("Ingrese la placa: "); int placa = read.nextInt();
+                System.out.println("Ingrese el color del bus: "); String color = read.next();
+                
+                break;
+            }
+            case 2:{
+                
+                break;
+            }
+            case 3:{
+                
+                break;
+            }
+            
+            case 4:{
+                
+                break;
+            }
+            default:
+                System.out.println("Opcion no valida!");
+                break;
+        }
+    }
 
     public static void crearTransportista() {
         System.out.println("Ingrese el tiempo de experiencia: ");
@@ -215,8 +261,32 @@ public class ClaseMain {
     }
     
     public static void listarAlum(){
-        for(Alumno alumns: alums){
-            
+        String salida = "";
+        for (int i = 0; i < pers.size(); i++) {
+            if(pers.get(i) instanceof Alumno){
+                salida=salida+pers.get(i)+"\n";
+            }
         }
+        System.out.println(salida);
+    }
+    
+    public static void listarTransportistas(){
+        String salida = "";
+        for (int i = 0; i < pers.size(); i++) {
+            if(pers.get(i) instanceof Transportista){
+                salida=salida+pers.get(i)+"\n";
+            }
+        }
+        System.out.println(salida);
+    }
+    
+    public static void listarTransportes(){
+        for(Transporte transp: trans){
+            System.out.println(trans.indexOf(transp));
+        }
+    }
+    
+    public static void listarATrans(){
+        
     }
 }

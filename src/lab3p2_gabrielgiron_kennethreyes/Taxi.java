@@ -8,38 +8,31 @@ package lab3p2_gabrielgiron_kennethreyes;
  *
  * @author Daniel
  */
-public class Taxi {
+public class Taxi extends Transporte{
 
-    int capacidad;
-    int id;
+    final int capacidad = 4;
+    private String idTaxi;
 
-    public Taxi() {
+    public Taxi(String id, String placa, String color) {
+        super(placa, color);
+        this.idTaxi = id;
     }
-
-    public Taxi(int capacidad, int id) {
-        this.capacidad = capacidad;
-        this.id = id;
-    }
-
+    
     public int getCapacidad() {
         return capacidad;
     }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
+    
+    public String getIdTaxi() {
+        return idTaxi;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String idTaxi) {
+        this.idTaxi = idTaxi;
     }
 
     @Override
     public String toString() {
-        return "Taxi " + "capacidad= " + capacidad + ", id= " + id;
+        return "Vehiculo: Taxi"+super.toString();
     }
 
 }
