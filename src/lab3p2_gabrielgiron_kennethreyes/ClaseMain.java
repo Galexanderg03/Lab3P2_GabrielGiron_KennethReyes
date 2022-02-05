@@ -236,7 +236,9 @@ public class ClaseMain {
                     break;
 
                 case 9:
+                    do{
                     
+                    }while(tran.getRutas().size() != 0);
                     break;
 
                 default:
