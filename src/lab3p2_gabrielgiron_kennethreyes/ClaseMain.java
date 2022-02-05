@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,12 +18,13 @@ import java.util.logging.Logger;
  * @author Daniel
  */
 public class ClaseMain {
-
+    static Random rnd = new Random();
     static Scanner read = new Scanner(System.in).useDelimiter("\n");
     static ArrayList<Clase> clases = new ArrayList();
     static ArrayList<Persona> pers = new ArrayList();
     static ArrayList<Transporte> trans = new ArrayList();
     static ArrayList<Rutas> rutas = new ArrayList();
+    static Persona perso = new Persona();
 
     public static void main(String[] args) {
         int opcion;
@@ -34,7 +36,7 @@ public class ClaseMain {
             switch (opcion) {
                 case 0:
                     break;
-                    
+
                 case 1:
                     crearClass();
                     break;
@@ -106,18 +108,62 @@ public class ClaseMain {
             switch (opcion) {
                 case 0:
                     break;
-                
+
                 case 1: {
                     System.out.println("Ingrese la posicion del alumno en la lista");
                     int pos = read.nextInt();
-                    if (pos < pers.size()) {
-                        if (pers.get(pos) instanceof Alumno) {
-                            tran.getAlumn().add(((Alumno) pers.get(pos)));
+                    if (tran instanceof Buses) {
+                        if (((Buses) tran).getSillas() + ((Buses) tran).getPie() != tran.getAlumn().size()) {
+                            if (pos < pers.size()) {
+                                if (pers.get(pos) instanceof Alumno) {
+                                    tran.getAlumn().add(((Alumno) pers.get(pos)));
+                                } else {
+                                    System.out.println("Posicion no Valida");
+                                }
+                            } else {
+                                System.out.println("Posicion no Valida");
+                            }
                         } else {
-                            System.out.println("Posicion no Valida");
+                            System.out.println("El vehiculo va lleno");
                         }
-                    } else {
-                        System.out.println("Posicion no Valida");
+                    } else if (tran instanceof Rapidito) {
+                        if (((Rapidito) tran).getSillas() != tran.getAlumn().size()) {
+                            if (pos < pers.size()) {
+                                if (pers.get(pos) instanceof Alumno) {
+                                    tran.getAlumn().add(((Alumno) pers.get(pos)));
+                                } else {
+                                    System.out.println("Posicion no Valida");
+                                }
+                            } else {
+                                System.out.println("Posicion no Valida");
+                            }
+                        } else {
+                            System.out.println("El vehiculo va lleno");
+                        }
+                    } else if (tran instanceof Taxi) {
+                        if (((Taxi) tran).getCapacidad() != tran.getAlumn().size()) {
+                            if (pos < pers.size()) {
+                                if (pers.get(pos) instanceof Alumno) {
+                                    tran.getAlumn().add(((Alumno) pers.get(pos)));
+                                } else {
+                                    System.out.println("Posicion no Valida");
+                                }
+                            } else {
+                                System.out.println("Posicion no Valida");
+                            }
+                        }
+                    } else if (tran instanceof MotoTaxi) {
+                        if (((MotoTaxi) tran).getCapacidad() != tran.getAlumn().size()) {
+                            if (pos < pers.size()) {
+                                if (pers.get(pos) instanceof Alumno) {
+                                    tran.getAlumn().add(((Alumno) pers.get(pos)));
+                                } else {
+                                    System.out.println("Posicion no Valida");
+                                }
+                            } else {
+                                System.out.println("Posicion no Valida");
+                            }
+                        }
                     }
                     break;
                 }
@@ -149,8 +195,8 @@ public class ClaseMain {
                 case 4: {
                     System.out.println("Ingrese la posicion del transportista en la lista: ");
                     int pos = read.nextInt();
-                    if(pos<pers.size()){
-                        if(pers.get(pos) instanceof Transportista){
+                    if (pos < pers.size()) {
+                        if (pers.get(pos) instanceof Transportista) {
                             String transports = pers.get(pos).getNombre();
                             tran.setTransportista(transports);
                         }
@@ -163,7 +209,7 @@ public class ClaseMain {
                     break;
                 }
 
-                case 6:{
+                case 6: {
                     System.out.println("Ingrese la posicion de la ruta en la lista");
                     int pos = read.nextInt();
                     if (pos < rutas.size()) {
@@ -173,7 +219,7 @@ public class ClaseMain {
                     }
                     break;
                 }
-                
+
                 case 7:
                     System.out.println("Ingrese la posicion de la ruta en la lista a eliminar");
                     int pos = read.nextInt();
@@ -190,7 +236,7 @@ public class ClaseMain {
                     break;
 
                 case 9:
-                    Simulacion(tran);
+                    
                     break;
 
                 default:
@@ -210,8 +256,11 @@ public class ClaseMain {
     }
 
     public static void crearAlum() {
+        int idEstudiante;
+        do{
         System.out.println("Ingrese id de estudiante: ");
-        int idEstudiante = read.nextInt();
+        idEstudiante = read.nextInt();
+        }while(buscarId(idEstudiante));
         System.out.println("Nombre del estudiante: ");
         String name = read.next();
         System.out.println("Ingrese fecha de nacimiento: ");
@@ -225,7 +274,17 @@ public class ClaseMain {
         }
 
     }
-
+    
+    public static boolean buscarId(int codigo) {
+        for (Persona eph : pers) {
+            if (eph.getId() == codigo) {
+                return true;
+            }
+        }
+        System.out.println("El id debe ser unico");
+        return false;
+    }
+    
     public static void crearRuta() {
         System.out.println("Ingrese el nombre de la ruta: ");
         String name = read.next();

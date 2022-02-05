@@ -20,10 +20,7 @@ public class Alumno extends Persona {
         super(nombre, id, fecha);
         this.estudentid = estudentid;
     }
-
-    public Alumno() {
-    }
-
+    
     public int getEstudentid() {
         return estudentid;
     }
