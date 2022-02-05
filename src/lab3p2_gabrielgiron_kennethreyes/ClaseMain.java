@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  * @author Daniel
  */
 public class ClaseMain {
+
     static Random rnd = new Random();
     static Scanner read = new Scanner(System.in).useDelimiter("\n");
     static ArrayList<Clase> clases = new ArrayList();
@@ -236,9 +237,51 @@ public class ClaseMain {
                     break;
 
                 case 9:
-                    do{
-                    
-                    }while(tran.getRutas().size() != 0);
+                    do {
+                        int x1 = 0;
+                        int y1 = 0;
+                        do {
+                            Rutas SiguienteRuta;
+                            int Pos = 0;
+                            int D = 0;
+                            for (int i = 0; i < tran.getRutas().size(); i++) {
+                                int x2 = tran.getRutas().get(i).getX();
+                                int y2 = tran.getRutas().get(i).getY();
+                                int Xr = x2 - x1;
+                                int Yr = y2 - y1;
+                                double Xc = Math.pow(Xr, 2);
+                                double Yc = Math.pow(Yr, 2);
+                                int suma = (int) Xc + (int) Yc;
+                                double SQRT = Math.sqrt(suma);
+                                int total = (int) SQRT;
+                                if (D == 0) {
+                                    D = total;
+                                    SiguienteRuta = tran.getRutas().get(i);
+                                    Pos = i;
+                                } else if (total < D) {
+                                    D = total;
+                                    SiguienteRuta = tran.getRutas().get(i);
+                                    Pos = i;
+                                }
+                            }
+                            if (tran.getAlumn().size() > tran.getRutas().size()) {
+                                int bajar = tran.getAlumn().size() / tran.getRutas().size();
+                                while (bajar > 0) {
+                                    int B = rnd.nextInt(tran.getAlumn().size() - 1);
+                                    tran.getAlumn().remove(B);
+                                }
+                            } else if (tran.getAlumn().size() == tran.getRutas().size()) {
+                                int bajar = 1;
+                                while (bajar > 0) {
+                                    int B = rnd.nextInt(tran.getAlumn().size() - 1);
+                                    tran.getAlumn().remove(B);
+                                }
+                            } else if (tran.getAlumn().size() < tran.getRutas().size()) {
+                                System.out.println("Hay mas rutas que alumnos\n no se bajara nadie");
+                            }
+                            tran.getRutas().remove(Pos);
+                        } while (tran.getRutas().size() != 0);
+                    } while (tran.getRutas().size() != 0);
                     break;
 
                 default:
@@ -259,10 +302,10 @@ public class ClaseMain {
 
     public static void crearAlum() {
         int idEstudiante;
-        do{
-        System.out.println("Ingrese id de estudiante: ");
-        idEstudiante = read.nextInt();
-        }while(buscarId(idEstudiante));
+        do {
+            System.out.println("Ingrese id de estudiante: ");
+            idEstudiante = read.nextInt();
+        } while (buscarId(idEstudiante));
         System.out.println("Nombre del estudiante: ");
         String name = read.next();
         System.out.println("Ingrese fecha de nacimiento: ");
@@ -276,7 +319,7 @@ public class ClaseMain {
         }
 
     }
-    
+
     public static boolean buscarId(int codigo) {
         for (Persona eph : pers) {
             if (eph.getId() == codigo) {
@@ -286,7 +329,7 @@ public class ClaseMain {
         System.out.println("El id debe ser unico");
         return false;
     }
-    
+
     public static void crearRuta() {
         System.out.println("Ingrese el nombre de la ruta: ");
         String name = read.next();
